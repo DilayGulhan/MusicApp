@@ -24,33 +24,30 @@ public class UserController {
 
     @GetMapping
     @ApiPageable
-    public Page<UserResponse> listUsers(@ApiIgnore Pageable pageable) {
-        return userService.listUsers(pageable);
+    public Page<UserResponse> listUsers(@ApiIgnore Pageable pageable ) {
+        return userService.listUsers(pageable , authenticationService.getAuthenticatedUserId());
     }
 
     @GetMapping("/{userId}")
     public UserResponse getUser(@PathVariable String userId) {
-        return userService.getUser(userId);
+        return userService.getUser(userId , authenticationService.getAuthenticatedUserId());
     }
 
     @PostMapping
     public UserResponse createUser(@Valid @RequestBody CreateUserRequest createUserRequest) {
-        return userService.createUser(createUserRequest);
+        return userService.createUser(createUserRequest , authenticationService.getAuthenticatedUserId());
     }
 
     @PutMapping("/{userId}")
     public UserResponse updateUser(@PathVariable String userId, @Valid @RequestBody UpdateUserRequest updateUserRequest) {
-        return userService.updateUser(userId, updateUserRequest);
+        return userService.updateUser(userId, updateUserRequest , authenticationService.getAuthenticatedUserId());
     }
 
     @DeleteMapping("/{userId}")
     public UserResponse deleteUser(@PathVariable String userId) {
-        return userService.deleteUser(userId);
+        return userService.deleteUser(userId , authenticationService.getAuthenticatedUserId());
     }
 
-    @PostMapping("/reset-password")
-    public void resetPassword(@Valid @RequestBody ResetPasswordRequest resetPasswordRequest) {
-        authenticationService.resetPassword(authenticationService.getAuthenticatedUser(), resetPasswordRequest);
-    }
+
 
 }

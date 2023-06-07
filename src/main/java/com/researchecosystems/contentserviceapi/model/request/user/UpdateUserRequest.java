@@ -22,13 +22,6 @@ public class UpdateUserRequest {
     @NotNull(message = "Kullanıcı rolü boş bırakılamaz!")
     private UserRole userRole;
 
-    private String photoId;
 
-    @NotNull(message = "E-posta adresi görünürlüğü boş bırakılamaz!")
-    private Boolean emailVisible;
-
-    @NotBlank(message = "Açıklama boş olamaz!")
-    @Length(min = 20, max = 1500)
-    private String description;
 
 }

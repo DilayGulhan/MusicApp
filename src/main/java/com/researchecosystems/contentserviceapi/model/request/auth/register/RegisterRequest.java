@@ -1,13 +1,28 @@
 package com.researchecosystems.contentserviceapi.model.request.auth.register;
 
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
 
-@Data
+@Setter
+@Getter
+@ToString
 public class RegisterRequest {
+
+
+    @NotEmpty(message = "name must be filled!")
+    private String name;
+
+
+    @NotEmpty(message = "surname must be filled!")
+    private String surname;
+
+
 
     @Email(message = "Invalid Email!")
     @NotEmpty(message = "Email must be filled!")

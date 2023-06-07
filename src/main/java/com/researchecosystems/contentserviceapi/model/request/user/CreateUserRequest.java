@@ -14,26 +14,24 @@ import javax.validation.constraints.NotNull;
 @ToString
 public class CreateUserRequest {
 
-    @Email(message = "Geçersiz e-posta adresi.")
-    @NotEmpty(message = "Mail adresi boş bırakılamaz!")
+    @Email(message = "Email must be appoprite to the format.")
+    @NotEmpty(message = "Email must be filled!")
     private String email;
 
-    @NotEmpty(message = "İsim boş bırakılamaz!")
+    @NotEmpty(message = "Name must be filled!")
     private String name;
 
-    @NotEmpty(message = "Soyisim boş bırakılamaz!")
+    @NotEmpty(message = "Surname must be filled!")
     private String surname;
 
-    @NotNull(message = "Kullanıcı rolü boş bırakılamaz!")
+    @NotNull(message = "User role must be filled!")
     private UserRole userRole;
+
+    @NotNull(message = "Password must be filled!")
+    private String password ;
+
+
     
-    private String photoId;
 
-    @NotNull(message = "E-posta adresi görünürlüğü boş bırakılamaz!")
-    private Boolean emailVisible;
-
-    @NotBlank(message = "Açıklama boş olamaz!")
-    @Length(min = 20, max = 1500)
-    private String description;
 
 }

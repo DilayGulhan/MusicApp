@@ -1,6 +1,7 @@
 package com.researchecosystems.contentserviceapi.service;
 
 import com.researchecosystems.contentserviceapi.entity.User;
+import com.researchecosystems.contentserviceapi.entity.UserRole;
 import com.researchecosystems.contentserviceapi.exception.BusinessException;
 import com.researchecosystems.contentserviceapi.exception.ErrorCode;
 import com.researchecosystems.contentserviceapi.model.request.auth.*;
@@ -30,7 +31,17 @@ public class AuthenticationService {
     private final JwtService jwtService;
     private final EmailClient emailClient;
 
-    public void register(RegisterRequest registerRequest) {
+
+
+
+    public String getAuthenticatedUserId() {
+        String principal = (String) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        if (principal.equals("anonymousUser")) {
+            throw new BusinessException(ErrorCode.unauthorized, "Unauthorized user!");
+        }
+        return principal;
+    }
+    public User register(RegisterRequest registerRequest) {
         if (userRepository.existsByEmail(registerRequest.getEmail())) {
             throw new BusinessException(ErrorCode.account_already_exists, "Account already exists");
         }
@@ -39,6 +50,9 @@ public class AuthenticationService {
         ZonedDateTime verificationCodeExpirationDate = DateUtil.now().plusDays(1);
 
         User user = new User();
+        user.setName(registerRequest.getName());
+        user.setSurname(registerRequest.getSurname());
+        user.setUserRole(UserRole.USER);
         user.setEmail(registerRequest.getEmail());
         user.setPasswordHash(passwordEncoder.encode(registerRequest.getPassword()));
         user.setVerificationCode(verificationCode);
@@ -47,6 +61,7 @@ public class AuthenticationService {
         userRepository.save(user);
 
         emailClient.sendVerificationEmail(user);
+        return user;
     }
 
     public LoginResponse login(LoginRequest loginRequest) {
