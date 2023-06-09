@@ -19,10 +19,13 @@ import java.util.List;
 public class Video extends BaseEntity {
     private String title;
 
+//
+//    @ManyToMany(mappedBy = "videosList", fetch = FetchType.LAZY)
+//    @JsonIgnoreProperties("videosList")
+//    @Builder.Default
+//    private List<Category> categoryOfTheVideo = new LinkedList<>();
 
-    @ManyToMany(mappedBy = "videosList", fetch = FetchType.LAZY)
-    @JsonIgnoreProperties("videosList")
-    @Builder.Default
-    private List<Category> categoryOfTheVideo = new LinkedList<>();
+    private Category categoryOfTheVideo ;
+
     private Integer duration  ;
 }

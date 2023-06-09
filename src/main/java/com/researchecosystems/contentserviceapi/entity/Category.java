@@ -17,22 +17,17 @@ import java.util.List;
 @Entity
 @Table(name = "categories")
 public class Category extends BaseEntity {
-
     private String name;
     @OneToOne
     private Category parent;
 
     @ManyToMany(fetch = FetchType.LAZY)
-    @JoinTable(name = "video",
+    @JoinTable(name = "category_video",
             joinColumns = @JoinColumn(name = "category_id"),
-            inverseJoinColumns = @JoinColumn(name = "video_id")
-    )
-    @JsonIgnoreProperties("categories")
+            inverseJoinColumns = @JoinColumn(name = "video_id"))
+    @JsonIgnoreProperties("categoryOfTheVideo")
     private List<Video> videosList = new LinkedList<>();
-
     private boolean isSuperCategory ;
-
-
     @OneToMany(fetch = FetchType.LAZY)
     private List<Category> childCategories = new LinkedList<>();
 

@@ -21,3 +21,5 @@ VALUES ('123' , now(),now() , true , 'basecategory'  , null);
 INSERT INTO categories (id , created , updated , is_super_category , name , parent_id )
 VALUES ('1234' , now(),now() , false , 'Rockcategory'  , '123');
 
+INSERT INTO video(id, created, updated, duration, title) VALUES ( 'test' , now() ,now() , 120
+, 'StairwayToHeaven' )
