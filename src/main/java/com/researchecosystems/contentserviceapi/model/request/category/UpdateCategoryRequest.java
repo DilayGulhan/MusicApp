@@ -11,6 +11,6 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 public class UpdateCategoryRequest {
-    String name ;
-    Category parent ;
+    private String name ;
+   private  Category parent ;
 }

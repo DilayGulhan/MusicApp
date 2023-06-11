@@ -18,6 +18,9 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.HashSet;
+import java.util.Set;
+
 
 @Service
 @Transactional
@@ -47,18 +50,18 @@ public class VideoService {
     public VideoResponse addVideo(CreateVideoRequest videoRequest, String authenticatedUserId) {
         determineWhetherAdmin(authenticatedUserId);
 
-        Category categoryOfTheVideo = categoryRepository.findById(videoRequest.getCategoryId())
-                .orElseThrow(() -> new BusinessException(ErrorCode.resource_missing, "The parent category not found"));
-
+        Set<Category> categories = new HashSet<>();
+        for (String categoryId : videoRequest.getCategoryIds()) {
+            Category category = categoryRepository.findById(categoryId)
+                    .orElseThrow(() -> new BusinessException(ErrorCode.resource_missing, "The category not found"));
+            categories.add(category);
+        }
         Video video = new Video();
-        video.setCategoryOfTheVideo(categoryOfTheVideo);
+        video.setCategoriesOfTheVideo(categories);
         video.setTitle(videoRequest.getTitle());
         video.setDuration(videoRequest.getDuration());
-        categoryOfTheVideo.getVideosList().add(video);
 
         videoRepository.save(video);
-        categoryRepository.save(categoryOfTheVideo);
-
         return VideoResponse.fromEntity(video);
     }
     @Transactional
@@ -67,24 +70,26 @@ public class VideoService {
         determineWhetherAdmin(authenticatedUserId);
         Video video = videoRepository.findById(videoId)
                 .orElseThrow(() -> new BusinessException(ErrorCode.resource_missing , "There is no video like that!"));
-        Category categoryOfTheVideo = video.getCategoryOfTheVideo();
-        categoryOfTheVideo.getVideosList().remove(video);
-        categoryRepository.save(categoryOfTheVideo);
         videoRepository.deleteById(videoId);
     }
 
     public VideoResponse updateVideo(String videoId , UpdateVideoRequest updateVideoRequest ,
                                      String authenticatedUserId){
 
-       determineWhetherAdmin(authenticatedUserId);
+        determineWhetherAdmin(authenticatedUserId);
         Video video = videoRepository.findById(videoId).
                 orElseThrow(() -> new BusinessException(ErrorCode.resource_missing, "There is no video like that!"));
-        Category categoryOfTheVideo = categoryRepository.findById(updateVideoRequest.getCategoryId())
-                .orElseThrow(()-> new BusinessException(ErrorCode.resource_missing ,"The parent category not found"));
 
+        Set<Category> categories = new HashSet<>();
+        for (String categoryId : updateVideoRequest.getCategoryIds()) {
+            Category category = categoryRepository.findById(categoryId)
+                    .orElseThrow(() -> new BusinessException(ErrorCode.resource_missing, "The category not found"));
+            categories.add(category);
+        }
 
+        video.setCategoriesOfTheVideo(categories);
         video.setTitle(updateVideoRequest.getTitle());
-        video.setCategoryOfTheVideo(categoryOfTheVideo);
+
         videoRepository.save(video);
         return VideoResponse.fromEntity(video);
 

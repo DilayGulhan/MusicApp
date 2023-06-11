@@ -41,6 +41,16 @@ public class AuthenticationService {
         }
         return principal;
     }
+
+    public String getAuthenticatedContractRecordId() {
+        String principal = (String) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        if (principal.equals("anonymousContractRecord")) {
+            throw new BusinessException(ErrorCode.unauthorized, "Unauthorized record!");
+        }
+        return principal;
+    }
+
+
     public User register(RegisterRequest registerRequest) {
         if (userRepository.existsByEmail(registerRequest.getEmail())) {
             throw new BusinessException(ErrorCode.account_already_exists, "Account already exists");

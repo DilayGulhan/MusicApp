@@ -18,8 +18,7 @@ import java.util.stream.Collectors;
 public class VideoResponse {
     private String id;
     private String title;
- //   private List<String> categoriesOfTheVideo;
-private Category categoryOfTheVideo;
+    private List<String> categoriesOfTheVideo;
     private ZonedDateTime createdAt;
     private ZonedDateTime updatedAt;
     private int duration ;
@@ -28,9 +27,8 @@ private Category categoryOfTheVideo;
         return VideoResponse.builder().
                 id(video.getId()).
                 title(video.getTitle()).
-               // categoriesOfTheVideo(video.getCategoryOfTheVideo().stream().map(Category::getName).collect(Collectors.toList())).
-             duration(video.getDuration()).
-              categoryOfTheVideo(video.getCategoryOfTheVideo()).
+                categoriesOfTheVideo(video.getCategoriesOfTheVideo().stream().map(Category::getName).collect(Collectors.toList())).
+                duration(video.getDuration()).
                 createdAt(video.getCreated()).
                 updatedAt(video.getUpdated()).build();
     }
