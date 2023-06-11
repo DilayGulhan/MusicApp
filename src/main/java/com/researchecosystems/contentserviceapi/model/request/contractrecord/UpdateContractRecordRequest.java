@@ -5,7 +5,7 @@ import lombok.Data;
 
 @Data
 @AllArgsConstructor
-public class CreateandUpdateContractRecordRequest {
+public class UpdateContractRecordRequest {
     private String name ;
     private boolean isActive ;
 

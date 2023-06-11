@@ -42,13 +42,7 @@ public class AuthenticationService {
         return principal;
     }
 
-    public String getAuthenticatedContractRecordId() {
-        String principal = (String) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        if (principal.equals("anonymousContractRecord")) {
-            throw new BusinessException(ErrorCode.unauthorized, "Unauthorized record!");
-        }
-        return principal;
-    }
+
 
 
     public User register(RegisterRequest registerRequest) {

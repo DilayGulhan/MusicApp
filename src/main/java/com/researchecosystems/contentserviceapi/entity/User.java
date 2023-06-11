@@ -5,6 +5,8 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import java.time.ZonedDateTime;
+import java.util.HashSet;
+import java.util.Set;
 
 @Table(name = "users")
 @Entity
@@ -43,4 +45,6 @@ public class User extends BaseEntity {
     @Column(name = "is_verified")
     private boolean verified;
 
+    @ManyToOne
+    private Subscription subscription;
 }

@@ -1,7 +1,6 @@
 package com.researchecosystems.contentserviceapi.controller;
 
-import com.researchecosystems.contentserviceapi.model.request.contractrecord.CreateandUpdateContractRecordRequest;
-import com.researchecosystems.contentserviceapi.model.response.CategoryResponse;
+import com.researchecosystems.contentserviceapi.model.request.contractrecord.UpdateContractRecordRequest;
 import com.researchecosystems.contentserviceapi.model.response.ContractRecordResponse;
 import com.researchecosystems.contentserviceapi.service.AuthenticationService;
 import com.researchecosystems.contentserviceapi.service.ContractRecordService;
@@ -18,13 +17,13 @@ private final AuthenticationService authenticationService ;
 private final ContractRecordService contractRecordService ;
 
 @PostMapping("/{subscriptionName}")
-public ContractRecordResponse addRecord(@Valid @RequestBody CreateandUpdateContractRecordRequest contractRecord ,@PathVariable String subscriptionName){
-        return contractRecordService.addContractRecord(authenticationService.getAuthenticatedUserId(), subscriptionName , contractRecord );
+public ContractRecordResponse addRecord( @PathVariable String subscriptionName){
+        return contractRecordService.addContractRecord(authenticationService.getAuthenticatedUserId(), subscriptionName  );
 
     }
     @PutMapping
-    public ContractRecordResponse updateRecord( @Valid @RequestBody CreateandUpdateContractRecordRequest contractRecord ){
-        return contractRecordService.updateContractRecord(authenticationService.getAuthenticatedUserId(), contractRecord , authenticationService.getAuthenticatedContractRecordId() );
+    public ContractRecordResponse updateRecord( @Valid @RequestBody UpdateContractRecordRequest contractRecord ){
+        return contractRecordService.updateContractRecord(authenticationService.getAuthenticatedUserId(), contractRecord);
 
     }
 
