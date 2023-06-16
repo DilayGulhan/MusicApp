@@ -1,5 +1,6 @@
 package com.researchecosystems.contentserviceapi.service;
 
+import com.researchecosystems.contentserviceapi.entity.Invoice;
 import com.researchecosystems.contentserviceapi.entity.Subscription;
 import com.researchecosystems.contentserviceapi.entity.User;
 import com.researchecosystems.contentserviceapi.entity.UserRole;
@@ -7,6 +8,7 @@ import com.researchecosystems.contentserviceapi.exception.BusinessException;
 import com.researchecosystems.contentserviceapi.exception.ErrorCode;
 import com.researchecosystems.contentserviceapi.model.request.Subscription.CreateSubscriptionRequest;
 import com.researchecosystems.contentserviceapi.model.request.Subscription.UpdateSubscriptionRequest;
+import com.researchecosystems.contentserviceapi.model.response.InvoiceResponse;
 import com.researchecosystems.contentserviceapi.model.response.SubscriptionResponse;
 import com.researchecosystems.contentserviceapi.repository.SubscriptionRepository;
 import com.researchecosystems.contentserviceapi.repository.UserRepository;
@@ -24,6 +26,7 @@ public class SubscriptionService {
    private final SubscriptionRepository subscriptionRepository;
 private final UserRepository userRepository ;
 
+
    public Page<SubscriptionResponse> listSubscription(Pageable pageable) {
 
       return subscriptionRepository.findAll(pageable).map(SubscriptionResponse::fromEntity);
@@ -37,6 +40,8 @@ private final UserRepository userRepository ;
       if (!currentUser.getUserRole().equals(UserRole.ADMIN) ) {
          throw new BusinessException(ErrorCode.forbidden, "You dont have the privilege.");
       }
+
+
       Subscription subscription = new Subscription();
       subscription.setName(subscriptionRequest.getName());
       subscription.setDuration(subscriptionRequest.getDuration());

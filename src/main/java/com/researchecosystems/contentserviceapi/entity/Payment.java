@@ -6,10 +6,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import javax.persistence.Entity;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Table(name = "Payment")
 @Entity
@@ -18,9 +15,8 @@ import javax.persistence.Table;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Payment extends BaseEntity {
-    private int amount ;
-    @ManyToOne
-    private Invoice invoice ;
+    private double amount ;
+    private String invoiceId ;
     private String senderCard ;
     private String receiverCard ;
 }

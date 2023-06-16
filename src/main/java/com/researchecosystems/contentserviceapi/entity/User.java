@@ -47,4 +47,10 @@ public class User extends BaseEntity {
 
     @ManyToOne
     private Subscription subscription;
+
+    @OneToOne
+    private Invoice invoice;
+
+
+
 }

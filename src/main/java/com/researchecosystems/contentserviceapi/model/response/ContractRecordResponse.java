@@ -26,7 +26,7 @@ public class ContractRecordResponse {
 
     public static ContractRecordResponse fromEntity(User user , Subscription subscription , ContractRecord contractRecord){
         return ContractRecordResponse.builder().
-                id(subscription.getId()).
+                id(contractRecord.getId()).
                 name(subscription.getName()).
                 monthlyFee(subscription.getMonthlyFee()).
                 duration(subscription.getDuration()).

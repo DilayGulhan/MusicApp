@@ -16,8 +16,9 @@ import javax.persistence.Table;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Invoice extends BaseEntity{
-    private int fee ;
-    @OneToOne
-    private ContractRecord contractRecord;
+    private double fee ;
+
+    private String contractRecordId;
+    private boolean isPaid ;
 
 }

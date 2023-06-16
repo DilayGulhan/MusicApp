@@ -16,15 +16,16 @@ public class ContractRecordController {
 private final AuthenticationService authenticationService ;
 private final ContractRecordService contractRecordService ;
 
-@PostMapping("/{subscriptionName}")
-public ContractRecordResponse addRecord( @PathVariable String subscriptionName){
-        return contractRecordService.addContractRecord(authenticationService.getAuthenticatedUserId(), subscriptionName  );
 
-    }
-    @PutMapping
+    @PutMapping("/update")
     public ContractRecordResponse updateRecord( @Valid @RequestBody UpdateContractRecordRequest contractRecord ){
         return contractRecordService.updateContractRecord(authenticationService.getAuthenticatedUserId(), contractRecord);
 
     }
+    @PostMapping("/{subscriptionName}")
+    public ContractRecordResponse addRecord( @PathVariable String subscriptionName){
+        return contractRecordService.addContractRecord(authenticationService.getAuthenticatedUserId(), subscriptionName  );
+    }
+
 
 }

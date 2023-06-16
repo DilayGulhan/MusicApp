@@ -1,13 +1,14 @@
 package com.researchecosystems.contentserviceapi.model.request.contractrecord;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
+import lombok.*;
 
-@Data
+@Getter
+@Setter
 @AllArgsConstructor
+@NoArgsConstructor
 public class UpdateContractRecordRequest {
     private String name ;
-    private boolean isActive ;
+
 
 
 }

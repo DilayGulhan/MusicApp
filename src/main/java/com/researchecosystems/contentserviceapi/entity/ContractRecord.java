@@ -6,15 +6,17 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.Entity;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
-@Table(name = "ContractRecord")
+
 @Entity
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
+@Table(name = "ContractRecord")
 public class ContractRecord extends BaseEntity{
     private String name ;
     private double monthlyFee ;
@@ -22,6 +24,8 @@ public class ContractRecord extends BaseEntity{
     private boolean isActive ;
 
     private String userId ;
+    @ManyToOne
+    private Invoice invoice;
 
 
 }
