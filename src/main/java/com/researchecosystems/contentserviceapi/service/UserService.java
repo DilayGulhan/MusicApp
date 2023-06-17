@@ -1,11 +1,13 @@
 package com.researchecosystems.contentserviceapi.service;
 
+import com.researchecosystems.contentserviceapi.entity.Invoice;
 import com.researchecosystems.contentserviceapi.entity.User;
 import com.researchecosystems.contentserviceapi.entity.UserRole;
 import com.researchecosystems.contentserviceapi.exception.BusinessException;
 import com.researchecosystems.contentserviceapi.exception.ErrorCode;
 import com.researchecosystems.contentserviceapi.model.request.user.CreateUserRequest;
 import com.researchecosystems.contentserviceapi.model.request.user.UpdateUserRequest;
+import com.researchecosystems.contentserviceapi.model.response.InvoiceResponse;
 import com.researchecosystems.contentserviceapi.model.response.user.UserResponse;
 import com.researchecosystems.contentserviceapi.repository.UserRepository;
 import lombok.AllArgsConstructor;
@@ -34,6 +36,20 @@ public class UserService {
         }
 
         return userRepository.findAll(pageable).map(UserResponse::fromEntity);
+    }
+
+
+    public InvoiceResponse getInvoiceOfTheUser(String authenticatedUserId) {
+        User currentUser = userRepository.findById(authenticatedUserId)
+                .orElseThrow(() -> new BusinessException(ErrorCode.resource_missing, "There is no user like that!"));
+
+
+        if (currentUser.getInvoice() == null) {
+            throw new BusinessException(ErrorCode.resource_missing, "You haven't got any invoice");
+        }
+        Invoice invoice = currentUser.getInvoice();
+        return InvoiceResponse.fromEntity(invoice);
+
     }
 
     public UserResponse getUser(String userId , String authenticatedUserId) {

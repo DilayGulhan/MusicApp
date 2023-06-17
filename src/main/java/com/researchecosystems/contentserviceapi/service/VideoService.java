@@ -70,7 +70,8 @@ public class VideoService {
         determineWhetherAdmin(authenticatedUserId);
         Video video = videoRepository.findById(videoId)
                 .orElseThrow(() -> new BusinessException(ErrorCode.resource_missing , "There is no video like that!"));
-        videoRepository.deleteById(videoId);
+
+    videoRepository.deleteById(videoId);
     }
 
     public VideoResponse updateVideo(String videoId , UpdateVideoRequest updateVideoRequest ,

@@ -3,6 +3,7 @@ package com.researchecosystems.contentserviceapi.controller;
 import com.researchecosystems.contentserviceapi.model.request.auth.ResetPasswordRequest;
 import com.researchecosystems.contentserviceapi.model.request.user.CreateUserRequest;
 import com.researchecosystems.contentserviceapi.model.request.user.UpdateUserRequest;
+import com.researchecosystems.contentserviceapi.model.response.InvoiceResponse;
 import com.researchecosystems.contentserviceapi.model.response.user.UserResponse;
 import com.researchecosystems.contentserviceapi.service.AuthenticationService;
 import com.researchecosystems.contentserviceapi.service.UserService;
@@ -36,6 +37,11 @@ public class UserController {
     @PostMapping
     public UserResponse createUser(@Valid @RequestBody CreateUserRequest createUserRequest) {
         return userService.createUser(createUserRequest , authenticationService.getAuthenticatedUserId());
+    }
+
+    @GetMapping("/getInvoice")
+    public InvoiceResponse getInvoice(){
+        return userService.getInvoiceOfTheUser(authenticationService.getAuthenticatedUserId());
     }
 
     @PutMapping("/{userId}")
