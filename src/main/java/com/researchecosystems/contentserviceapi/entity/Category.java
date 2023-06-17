@@ -18,7 +18,9 @@ import java.util.List;
 @Table(name = "categories")
 public class Category extends BaseEntity {
     private String name;
-    @OneToOne
+
+    @ManyToOne
+    @JoinColumn(name = "parent_id")
     private Category parent;
 
     @ManyToMany(fetch = FetchType.LAZY)
@@ -28,8 +30,9 @@ public class Category extends BaseEntity {
     @JsonIgnoreProperties("categoryOfTheVideo")
     private List<Video> videosList = new LinkedList<>();
     private boolean isSuperCategory ;
-    @OneToMany(fetch = FetchType.LAZY)
-    private List<Category> childCategories = new LinkedList<>();
+
+
+
 
 
 }

@@ -17,7 +17,9 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Service
 @Transactional
@@ -47,6 +49,7 @@ public class CategoryService {
         category.setSuperCategory(false);
         category.setName(request.getName());
         category.setSuperCategory(false);
+
         categoryRepository.save(category);
         categoryRepository.save(parent);
         return CategoryResponse.fromEntity(category);
@@ -64,8 +67,10 @@ public class CategoryService {
         if (category.isSuperCategory()) {
             throw new BusinessException(ErrorCode.forbidden, "The super category can't be deleted ");
         }
-//       Category parent = category.getParent();
-//       parent.setChildCategories(category.getChildCategories());
+
+        categoryRepository.findAllByParent(category)
+                .forEach(child ->  child.setParent(category.getParent()));
+
         categoryRepository.deleteById(id);
     }
 
