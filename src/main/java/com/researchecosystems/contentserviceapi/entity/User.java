@@ -1,11 +1,13 @@
 package com.researchecosystems.contentserviceapi.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
 import java.time.ZonedDateTime;
 import java.util.HashSet;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
 
@@ -52,7 +54,9 @@ public class User extends BaseEntity {
     @OneToOne
     private Invoice invoice;
 
-
+//    @ManyToMany(fetch = FetchType.LAZY)
+//
+//    private List<Video> favoriteVideos= new LinkedList<>();
 
 
 

@@ -39,10 +39,7 @@ return invoiceService.payInvoice(paymentRequest, authenticationService.getAuthen
     }
 
 
-//    @GetMapping("/seeInvoice/{contractRecordId}")
-//    public InvoiceResponse getInvoiceBySelf(@PathVariable String contractRecordId){
-//        return invoiceService.getInvoice(contractRecordId , authenticationService.getAuthenticatedUserId());
-//    }
+
 
     @GetMapping("/{invoiceId}")
     public InvoiceResponse getInvoicebyAdmin(@PathVariable String invoiceId){

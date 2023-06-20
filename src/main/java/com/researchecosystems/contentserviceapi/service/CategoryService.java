@@ -29,9 +29,7 @@ public class CategoryService {
     private final UserRepository userRepository;
 
     public Page<CategoryResponse> listCategories(Pageable pageable) {
-
         return categoryRepository.findAll(pageable).map(CategoryResponse::fromEntity);
-
     }
 
 

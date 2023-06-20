@@ -31,10 +31,6 @@ public class PaymentService {
         pay.setInvoiceId(invoiceId);
         pay.setSenderCard(payment.getSenderCard());
         pay.setReceiverCard("MUSIC APP COMPANY CARD ");
-
-
         paymentRepository.save(pay);
-
-
     }
 }
