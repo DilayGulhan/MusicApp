@@ -5,3 +5,4 @@ WORKDIR /usr/local/app
 COPY ./pom.xml ./
 
 RUN mvn clean dependency:go-offline -B
+
