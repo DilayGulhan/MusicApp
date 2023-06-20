@@ -1,4 +1,4 @@
-FROM registry.gitlab.com/dilaygulhan/YouTubeMusic/base:latest as builder
+FROM registry.gitlab.com/dilaygulhan/youtubemusic/base:latest as builder
 WORKDIR /usr/local/app
 COPY ./ ./
 RUN mvn \
