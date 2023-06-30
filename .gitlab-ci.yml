@@ -72,6 +72,6 @@ Deploy Dev:
     - mkdir content-service
     - envsubst < .dev/docker-compose.template.yml > content-service/docker-compose.yml
     - scp -r content-service dilay@13.51.207.115:C:\Users\dilay\OneDrive\Desktop
-    - ssh dilaygulhan@13.51.207.115  "cd C:\Users\dilay\OneDrive\Desktop\youtubemusic && docker compose up -d"
+    - ssh dilaygulhan@13.51.207.115  "cd C:\Users\dilay\OneDrive\Desktop\YoutubeMusic && docker compose up -d"
 
 
