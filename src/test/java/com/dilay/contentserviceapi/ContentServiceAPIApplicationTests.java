@@ -1,4 +1,4 @@
-package com.researchecosystems.contentserviceapi;
+package com.dilay.contentserviceapi;
 
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;

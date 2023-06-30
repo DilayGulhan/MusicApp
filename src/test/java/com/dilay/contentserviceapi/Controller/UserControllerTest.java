@@ -1,14 +1,14 @@
-package com.researchecosystems.contentserviceapi.Controller;
+package com.dilay.contentserviceapi.Controller;
 
-import com.researchecosystems.contentserviceapi.entity.User;
-import com.researchecosystems.contentserviceapi.entity.UserRole;
-import com.researchecosystems.contentserviceapi.model.request.auth.LoginRequest;
-import com.researchecosystems.contentserviceapi.model.request.user.CreateUserRequest;
-import com.researchecosystems.contentserviceapi.model.request.user.UpdateUserRequest;
-import com.researchecosystems.contentserviceapi.model.response.LoginResponse;
-import com.researchecosystems.contentserviceapi.repository.UserRepository;
-import com.researchecosystems.contentserviceapi.security.JwtService;
-import com.researchecosystems.contentserviceapi.service.AuthenticationService;
+import com.dilay.contentserviceapi.entity.User;
+import com.dilay.contentserviceapi.entity.UserRole;
+import com.dilay.contentserviceapi.model.request.auth.LoginRequest;
+import com.dilay.contentserviceapi.model.request.user.CreateUserRequest;
+import com.dilay.contentserviceapi.model.request.user.UpdateUserRequest;
+import com.dilay.contentserviceapi.model.response.LoginResponse;
+import com.dilay.contentserviceapi.repository.UserRepository;
+import com.dilay.contentserviceapi.security.JwtService;
+import com.dilay.contentserviceapi.service.AuthenticationService;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
