@@ -1,7 +1,7 @@
 stages:
   - base
   - build
-#  - deploy
+  - deploy
 
 variables:
   CI_IMAGE_TAG: ${CI_COMMIT_REF_SLUG}-${CI_COMMIT_SHORT_SHA}
@@ -54,24 +54,24 @@ Build:
     - docker tag $CI_REGISTRY_IMAGE:$CI_IMAGE_TAG $CI_REGISTRY_IMAGE:latest
     - docker push $CI_REGISTRY_IMAGE:$CI_IMAGE_TAG
 
-#Deploy Dev:
-#  stage: deploy
-#  image: debian:10-slim
-#  only:
-#    - master
-#  before_script:
-#    - apt update
-#    - apt install --no-install-recommends -y openssh-client gettext-base
-#    - eval $(ssh-agent -s)
-#    - echo "$SSH_IDENTITY" | tr -d '\r' | ssh-add -
-#    - mkdir -p ~/.ssh
-#    - chmod 700 ~/.ssh
-#    - ssh-keyscan 13.51.166.10  >> ~/.ssh/known_hosts
-#    - chmod 644 ~/.ssh/known_hosts
-#  script:
-#    - mkdir content-service
-#    - envsubst < .dev/docker-compose.template.yml > content-service/docker-compose.yml
-#    - scp -r content-service dilay@13.51.166.10:C:\Users\dilay\OneDrive\Masaüstü
-#    - ssh dilaygulhan@13.51.166.10  "cd C:\Users\dilay\OneDrive\Masaüstü\YouTubeMusic && docker compose up -d"
+Deploy Dev:
+  stage: deploy
+  image: debian:10-slim
+  only:
+    - master
+  before_script:
+    - apt update
+    - apt install --no-install-recommends -y openssh-client gettext-base
+    - eval $(ssh-agent -s)
+    - echo "$SSH_IDENTITY" | tr -d '\r' | ssh-add -
+    - mkdir -p ~/.ssh
+    - chmod 700 ~/.ssh
+    - ssh-keyscan 13.51.207.115  >> ~/.ssh/known_hosts
+    - chmod 644 ~/.ssh/known_hosts
+  script:
+    - mkdir content-service
+    - envsubst < .dev/docker-compose.template.yml > content-service/docker-compose.yml
+    - scp -r content-service dilay@13.51.207.115:C:\Users\dilay\OneDrive\Masaüstü
+    - ssh dilaygulhan@13.51.207.115  "cd C:\Users\dilay\OneDrive\Masaüstü\youtubemusic && docker compose up -d"
 
 
