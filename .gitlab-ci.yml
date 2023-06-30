@@ -71,7 +71,7 @@ Build:
 #  script:
 #    - mkdir content-service
 #    - envsubst < .dev/docker-compose.template.yml > content-service/docker-compose.yml
-#    - scp -r content-service dilay@13.51.166.10:/usr/local/lib/containers/
-#    - ssh dilaygulhan@13.51.166.10  "cd /usr/local/lib/containers/content-service && docker compose up -d"
-#
+#    - scp -r content-service dilay@13.51.166.10:C:\Users\dilay\OneDrive\Masaüstü
+#    - ssh dilaygulhan@13.51.166.10  "cd C:\Users\dilay\OneDrive\Masaüstü\YouTubeMusic && docker compose up -d"
+
 
