@@ -70,6 +70,8 @@ Deploy Dev:
     - chmod 644 ~/.ssh/known_hosts
 
   script:
+    - apt-get install sudo
+    - visudo
     - sudo service ssh restart
     - mkdir content-service
     - envsubst < .dev/docker-compose.template.yml > content-service/docker-compose.yml
