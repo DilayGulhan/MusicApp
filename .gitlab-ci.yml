@@ -70,8 +70,7 @@ Deploy Dev:
     - chmod 644 ~/.ssh/known_hosts
   script:
     - mkdir content-service
-    - envsubst < .dev/docker-compose.template.yml > content-service/docker-compose.yml
-    - scp -r content-service dilay@16.170.236.8:C:\Users\dilay\OneDrive\Desktop
-    - ssh dilaygulhan@16.170.236.8  "cd C:\Users\dilay\OneDrive\Desktop\YoutubeMusic && docker compose up -d"
-
+      - envsubst < .dev/docker-compose.template.yml > content-service/docker-compose.yml
+      - scp -r content-service dilay@16.170.236.8:"C:\Users\dilay\OneDrive\Desktop"
+      - ssh dilaygulhan@16.170.236.8 "cd C:\Users\dilay\OneDrive\Desktop\YoutubeMusic && docker-compose up -d"
 
