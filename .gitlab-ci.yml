@@ -70,9 +70,8 @@ Deploy Dev:
     - chmod 644 ~/.ssh/known_hosts
 
   script:
-    - apt-get install sudo
-    - visudo
-    - sudo service ssh restart
+
+    -systemctl restart ssh
     - mkdir content-service
     - envsubst < .dev/docker-compose.template.yml > content-service/docker-compose.yml
     - scp -r content-service dilay@13.53.197.211:C:\Users\dilay\OneDrive\Desktop
