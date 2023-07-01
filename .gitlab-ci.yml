@@ -68,6 +68,7 @@ Deploy Dev:
     - chmod 700 ~/.ssh
     - ssh-keyscan 13.53.197.211  >> ~/.ssh/known_hosts
     - chmod 644 ~/.ssh/known_hosts
+
   script:
     - mkdir content-service
     - envsubst < .dev/docker-compose.template.yml > content-service/docker-compose.yml
