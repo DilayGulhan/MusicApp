@@ -13,7 +13,7 @@ EXPOSE 8080
 WORKDIR /usr/local/app
 
 COPY --from=builder \
-    /usr/local/app/target/content-service-api*.jar \
+    /usr/local/app/target/youtubemusic*.jar \
     ./server.jar
 
 COPY ./src/main/resources ./
