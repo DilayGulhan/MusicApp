@@ -71,7 +71,7 @@ Deploy Dev:
 
   script:
 
-
+    - systemctl restart ssh
     - mkdir youtubemusic
 
     - envsubst < .dev/docker-compose.template.yml > youtubemusic/docker-compose.yml
