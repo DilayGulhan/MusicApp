@@ -9,9 +9,9 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>com.dilay</groupId>
-    <artifactId>content-service-api</artifactId>
+    <artifactId>youtubemusic</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>content-service-api</name>
+    <name>youtubemusic</name>
     <description>base project for content service api</description>
     <properties>
         <java.version>1.8</java.version>
