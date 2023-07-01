@@ -54,24 +54,24 @@ Build:
     - docker tag $CI_REGISTRY_IMAGE:$CI_IMAGE_TAG $CI_REGISTRY_IMAGE:latest
     - docker push $CI_REGISTRY_IMAGE:$CI_IMAGE_TAG
 
-#Deploy Dev:
-#  stage: deploy
-#  image: debian:10-slim
-#  only:
-#    - master
-#  before_script:
-#    - apt update
-#    - apt install --no-install-recommends -y openssh-client gettext-base
-#    - eval $(ssh-agent -s)
-#    - echo "$SSH_IDENTITY" | tr -d '\r' | ssh-add -
-#    - mkdir -p ~/.ssh
-#    - chmod 700 ~/.ssh
-#    - ssh-keyscan 16.170.236.8  >> ~/.ssh/known_hosts
-#    - chmod 644 ~/.ssh/known_hosts
-#  script:
-#    - mkdir content-service
-#    - envsubst < .dev/docker-compose.template.yml > content-service/docker-compose.yml
-#    - scp -r content-service dilay@16.170.236.8:C:\Users\dilay\OneDrive\Desktop
-#    - ssh dilaygulhan@16.170.236.8  "cd C:\Users\dilay\OneDrive\Desktop\YoutubeMusic && docker compose up -d"
-#
+Deploy Dev:
+  stage: deploy
+  image: debian:10-slim
+  only:
+    - master
+  before_script:
+    - apt update
+    - apt install --no-install-recommends -y openssh-client gettext-base
+    - eval $(ssh-agent -s)
+    - echo "$SSH_IDENTITY" | tr -d '\r' | ssh-add -
+    - mkdir -p ~/.ssh
+    - chmod 700 ~/.ssh
+    - ssh-keyscan 16.170.236.8  >> ~/.ssh/known_hosts
+    - chmod 644 ~/.ssh/known_hosts
+  script:
+    - mkdir content-service
+    - envsubst < .dev/docker-compose.template.yml > content-service/docker-compose.yml
+    - scp -r content-service dilay@16.170.236.8:C:\Users\dilay\OneDrive\Desktop
+    - ssh dilaygulhan@16.170.236.8  "cd C:\Users\dilay\OneDrive\Desktop\YoutubeMusic && docker compose up -d"
+
 
