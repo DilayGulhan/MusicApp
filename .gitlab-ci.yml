@@ -73,7 +73,7 @@ Deploy Dev:
 
     - mkdir youtubemusic
     - envsubst < .dev/docker-compose.template.yml > youtubemusic/docker-compose.yml
-    - scp -r youtubemusic ec2-user@13.53.197.211:/home/Users/dilay/youtubemusic
-    - ssh ec2-user@13.53.197.211  "cd /home/dilay/youtubemusic && docker compose up -d"
+    - scp -r youtubemusic ec2-user@13.53.197.211:"C:\Users\dilay\OneDrive\Masaüstü"
+    - ssh ec2-user@13.53.197.211  "cd C:\Users\dilay\OneDrive\Masaüstü\youtubemusic && docker compose up -d"
 
 
