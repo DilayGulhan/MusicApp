@@ -15,8 +15,8 @@ spring:
     platform: 'postgres'
     username: ${DB_USERNAME}
     password: ${DB_PASSWORD}
-#    url: ${DB_URL}
-    url : jdbc:postgresql://localhost:5432/musicappdemo
+    url: ${DB_URL}
+
 swagger:
   enabled: true
   host: localhost:8080
