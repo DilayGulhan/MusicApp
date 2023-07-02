@@ -66,7 +66,7 @@ Deploy Dev:
     - echo "$SSH_IDENTITY" | tr -d '\r' | ssh-add -
     - mkdir -p ~/.ssh
     - chmod 700 ~/.ssh
-    - ssh-keyscan 16.170.249.238  >> ~/.ssh/known_hosts
+    - ssh-keyscan 13.51.169.247  >> ~/.ssh/known_hosts
     - chmod 644 ~/.ssh/known_hosts
 
   script:
