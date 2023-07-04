@@ -23,4 +23,6 @@ public class FileData extends BaseEntity {
     @Lob
     @Column(name = "filedata" , length = 10000000)
     private byte[] fileData;
+
+
 }
