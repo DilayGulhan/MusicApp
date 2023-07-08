@@ -32,6 +32,12 @@ public class UserController {
     public UserResponse getUser(@PathVariable String userId) {
         return userService.getUser(userId , authenticationService.getAuthenticatedUserId());
     }
+    @PostMapping("/{nameOfTheVideo}")
+    public UserResponse likeVideo(@PathVariable String nameOfTheVideo){
+        return userService.likeVideo( authenticationService.getAuthenticatedUserId(), nameOfTheVideo );
+
+
+    }
 
     @PostMapping
     public UserResponse createUser(@Valid @RequestBody CreateUserRequest createUserRequest) {
@@ -43,12 +49,12 @@ public class UserController {
         return userService.getInvoiceOfTheUser(authenticationService.getAuthenticatedUserId());
     }
 
-    @PutMapping("/{userId}")
+    @PutMapping("/update/{userId}")
     public UserResponse updateUser(@PathVariable String userId, @Valid @RequestBody UpdateUserRequest updateUserRequest) {
         return userService.updateUser(userId, updateUserRequest , authenticationService.getAuthenticatedUserId());
     }
 
-    @DeleteMapping("/{userId}")
+    @DeleteMapping("/delete/{userId}")
     public UserResponse deleteUser(@PathVariable String userId) {
         return userService.deleteUser(userId , authenticationService.getAuthenticatedUserId());
     }

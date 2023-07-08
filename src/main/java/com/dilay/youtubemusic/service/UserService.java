@@ -3,6 +3,7 @@ package com.dilay.youtubemusic.service;
 import com.dilay.youtubemusic.entity.Invoice;
 import com.dilay.youtubemusic.entity.User;
 import com.dilay.youtubemusic.entity.UserRole;
+import com.dilay.youtubemusic.entity.Video;
 import com.dilay.youtubemusic.exception.BusinessException;
 import com.dilay.youtubemusic.exception.ErrorCode;
 import com.dilay.youtubemusic.model.request.user.CreateUserRequest;
@@ -10,6 +11,7 @@ import com.dilay.youtubemusic.model.request.user.UpdateUserRequest;
 import com.dilay.youtubemusic.model.response.InvoiceResponse;
 import com.dilay.youtubemusic.model.response.user.UserResponse;
 import com.dilay.youtubemusic.repository.UserRepository;
+import com.dilay.youtubemusic.repository.VideoRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -25,6 +27,7 @@ public class UserService {
 
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
+    private final VideoRepository videoRepository ;
 
     public Page<UserResponse> listUsers(Pageable pageable, String authenticatedUserId) {
         User currentUser = userRepository.findById(authenticatedUserId)
@@ -38,6 +41,27 @@ public class UserService {
     }
 
 
+
+    public UserResponse updateUser(String userId, UpdateUserRequest updateUserRequest ,String authenticatedUserId) {
+
+        User currentUser = userRepository.findById(authenticatedUserId)
+                .orElseThrow(() -> new BusinessException(ErrorCode.resource_missing, "There is no user like that!"));
+
+        if (!currentUser.getUserRole().equals(UserRole.ADMIN) ) {
+            throw new BusinessException(ErrorCode.forbidden, "You dont have the privilege.");
+        }
+
+        User user = userRepository.findById(userId)
+                .orElseThrow(() -> new BusinessException(ErrorCode.resource_missing, "User not found"));
+
+        user.setName(updateUserRequest.getName());
+        user.setSurname(updateUserRequest.getSurname());
+        user.setUserRole(updateUserRequest.getUserRole());
+
+        userRepository.save(user);
+
+        return UserResponse.fromEntity(user);
+    }
     public InvoiceResponse getInvoiceOfTheUser(String authenticatedUserId) {
         User currentUser = userRepository.findById(authenticatedUserId)
                 .orElseThrow(() -> new BusinessException(ErrorCode.resource_missing, "There is no user like that!"));
@@ -49,6 +73,15 @@ public class UserService {
         Invoice invoice = currentUser.getInvoice();
         return InvoiceResponse.fromEntity(invoice);
 
+    }
+
+    public UserResponse likeVideo(String authenticatedUserId , String videoName){
+        User currentUser = userRepository.findById(authenticatedUserId)
+                .orElseThrow(() -> new BusinessException(ErrorCode.resource_missing, "There is no user like that!"));
+        Video video = videoRepository.findByTitle(videoName)
+                        .orElseThrow(() -> new BusinessException(ErrorCode.resource_missing, "There is no video like that!"));
+        currentUser.getFavoriteVideos().add(video);
+        return UserResponse.fromEntity(currentUser);
     }
 
     public UserResponse getUser(String userId , String authenticatedUserId) {
@@ -95,26 +128,6 @@ public class UserService {
         return UserResponse.fromEntity(newUser);
     }
 
-    public UserResponse updateUser(String userId, UpdateUserRequest updateUserRequest ,String authenticatedUserId) {
-
-        User currentUser = userRepository.findById(authenticatedUserId)
-                .orElseThrow(() -> new BusinessException(ErrorCode.resource_missing, "There is no user like that!"));
-
-        if (!currentUser.getUserRole().equals(UserRole.ADMIN) ) {
-            throw new BusinessException(ErrorCode.forbidden, "You dont have the privilege.");
-        }
-
-        User user = userRepository.findById(userId)
-                .orElseThrow(() -> new BusinessException(ErrorCode.resource_missing, "User not found"));
-
-        user.setName(updateUserRequest.getName());
-        user.setSurname(updateUserRequest.getSurname());
-        user.setUserRole(updateUserRequest.getUserRole());
-
-        userRepository.save(user);
-
-        return UserResponse.fromEntity(user);
-    }
 
     public UserResponse deleteUser(String userId ,String authenticatedUserId) {
         User currentUser = userRepository.findById(authenticatedUserId)
@@ -131,5 +144,8 @@ public class UserService {
 
         return UserResponse.fromEntity(user);
     }
+
+
+
 
 }

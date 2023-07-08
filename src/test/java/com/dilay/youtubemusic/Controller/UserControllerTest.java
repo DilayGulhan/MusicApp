@@ -99,7 +99,7 @@ public class UserControllerTest {
 
          HttpEntity<UpdateUserRequest> request = new HttpEntity<>(updateUserRequest, headers);
         ResponseEntity<User> response = template
-                .exchange("/user/user2" , HttpMethod.PUT , request, User.class);
+                .exchange("/user/update/user2" , HttpMethod.PUT , request, User.class);
         Assertions.assertEquals(response.getStatusCode(), HttpStatus.OK);
         Assertions.assertEquals( "testerName", response.getBody().getName());
     }
@@ -120,7 +120,7 @@ public class UserControllerTest {
         HttpEntity<String> request = new HttpEntity<>(null, headers);
 
 
-        ResponseEntity<Void> response = template.exchange("/user/user2", HttpMethod.DELETE, request, Void.class);
+        ResponseEntity<Void> response = template.exchange("/user/delete/user2", HttpMethod.DELETE, request, Void.class);
 
 
         assertEquals(HttpStatus.OK, response.getStatusCode());

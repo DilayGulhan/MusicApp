@@ -1,10 +1,16 @@
 package com.dilay.youtubemusic.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
 import java.time.ZonedDateTime;
+import java.util.HashSet;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Set;
 
 @Table(name = "users")
 @Entity
@@ -49,9 +55,12 @@ public class User extends BaseEntity {
     @OneToOne
     private Invoice invoice;
 
-//    @ManyToMany(fetch = FetchType.LAZY)
-//
-//    private List<Video> favoriteVideos= new LinkedList<>();
+    @JoinTable(name = "user_video",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "video_id"))
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JsonIgnoreProperties("favoriteVideo")
+    private Set<Video> favoriteVideos= new HashSet<>();
 
 
 

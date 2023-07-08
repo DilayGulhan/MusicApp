@@ -66,14 +66,14 @@ Deploy Dev:
     - echo "$SSH_IDENTITY" | tr -d '\r' | ssh-add -
     - mkdir -p ~/.ssh
     - chmod 700 ~/.ssh
-    - ssh-keyscan 16.171.146.62  >> ~/.ssh/known_hosts
+    - ssh-keyscan 16.171.22.198  >> ~/.ssh/known_hosts
     - chmod 644 ~/.ssh/known_hosts
 
   script:
 
     - mkdir youtubemusic
     - envsubst < .dev/docker-compose.template.yml > youtubemusic/docker-compose.yml
-    - scp -r youtubemusic ec2-user@16.171.146.62:"/home/ec2-user/C:UsersdilayOneDriveBelgeler"
-    - ssh ec2-user@16.171.146.62  "cd '/home/ec2-user/C:UsersdilayOneDriveBelgeler/youtubemusic' && sudo systemctl start docker && docker-compose up -d"
+    - scp -r youtubemusic ec2-user@16.171.22.198:"/home/ec2-user/C:UsersdilayOneDriveBelgeler"
+    - ssh ec2-user@16.171.22.198  "cd '/home/ec2-user/C:UsersdilayOneDriveBelgeler/youtubemusic' && sudo systemctl start docker && docker-compose up -d"
 
 
