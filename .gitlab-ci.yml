@@ -74,6 +74,6 @@ Deploy Dev:
     - mkdir youtubemusic
     - envsubst < .dev/docker-compose.template.yml > youtubemusic/docker-compose.yml
     - scp -r youtubemusic ec2-user@16.171.22.198:"/home/ec2-user/C:UsersdilayOneDriveBelgeler"
-    - ssh ec2-user@16.171.22.198  "cd '/home/ec2-user/C:UsersdilayOneDriveBelgeler/youtubemusic' && docker-compose up -d"
+    - ssh ec2-user@16.171.22.198  "cd '/home/ec2-user/C:UsersdilayOneDriveBelgeler/youtubemusic' && sudo systemctl start docker && docker-compose up -d"
 
 
