@@ -19,6 +19,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.List;
 
 @Service
 @Transactional
@@ -80,7 +81,9 @@ public class UserService {
                 .orElseThrow(() -> new BusinessException(ErrorCode.resource_missing, "There is no user like that!"));
         Video video = videoRepository.findByTitle(videoName)
                         .orElseThrow(() -> new BusinessException(ErrorCode.resource_missing, "There is no video like that!"));
-        currentUser.getFavoriteVideos().add(video);
+        //currentUser.getFavoriteVideos().add(video);
+        List<Video> likedVideos = currentUser.getFavoriteVideos();
+        likedVideos.add(video);
         return UserResponse.fromEntity(currentUser);
     }
 

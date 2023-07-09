@@ -34,7 +34,7 @@ public class UserResponse {
                 .surname(user.getSurname())
                 .email(user.getEmail())
                 .userRole(user.getUserRole())
-                .favoriteVideos(user.getFavoriteVideos())
+              //  .favoriteVideos(user.getFavoriteVideos())
                 .build();
     }
 

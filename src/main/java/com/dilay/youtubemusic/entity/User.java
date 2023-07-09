@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
+import net.bytebuddy.dynamic.scaffold.MethodGraph;
 
 import javax.persistence.*;
 import java.time.ZonedDateTime;
@@ -60,7 +61,7 @@ public class User extends BaseEntity {
             inverseJoinColumns = @JoinColumn(name = "video_id"))
     @ManyToMany(fetch = FetchType.LAZY)
     @JsonIgnoreProperties("favoriteVideo")
-    private Set<Video> favoriteVideos= new HashSet<>();
+    private List<Video> favoriteVideos= new LinkedList<>();
 
 
 
