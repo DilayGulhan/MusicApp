@@ -13,7 +13,7 @@ spring:
   datasource:
     initialization-mode: always
     platform: 'postgres'
-    username: postgres
+    username: ${DB_USERNAME}
     password: 2446
     url: jdbc:postgresql://localhost:5432/musicappdemo
 
