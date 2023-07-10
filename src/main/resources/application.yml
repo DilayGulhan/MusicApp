@@ -1,6 +1,6 @@
 spring:
   application:
-    name: content-service-api
+    name: youtubemusic
   jpa:
     hibernate:
       ddl-auto: create-drop
