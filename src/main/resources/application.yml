@@ -15,7 +15,7 @@ spring:
     platform: 'postgres'
     username: ${DB_USERNAME}
     password: ${DB_PASSWORD}
-    url: ${DB_URL}
+    url: jdbc:postgresql://localhost:5432/musicappdemo
   servlet:
     multipart:
       max-file-size: 10MB

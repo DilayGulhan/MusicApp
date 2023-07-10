@@ -3,7 +3,7 @@ services:
   server:
     image: ${CI_REGISTRY_IMAGE}:${CI_IMAGE_TAG}
     environment:
-      - DB_URL=${DB_URL}
+      - DB_URL=jdbc:postgresql://localhost:5432/musicappdemo
       - DB_USERNAME=${DB_USERNAME}
       - DB_PASSWORD=${DB_URL}
       - JWT_SECRET=${JWT_SECRET}
