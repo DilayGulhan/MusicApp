@@ -3,9 +3,10 @@ services:
   server:
     image: ${CI_REGISTRY_IMAGE}:${CI_IMAGE_TAG}
     environment:
-      - DB_URL=${DB_URL}
-      - DB_USERNAME=${DB_USERNAME}
-      - DB_PASSWORD=${DB_URL}
-      - JWT_SECRET=${JWT_SECRET}
+      - DB_URL=jdbc:postgresql://localhost:5432/musicappdemo
+      - DB_USERNAME=postgres
+      - DB_PASSWORD=2446
+      - JWT_SECRET="5367566B5970337336763979244226452948404D6351665468576D5A7134743777217A25432A462D4A614E645267556B586E3272357538782F413F4428472B4B"
+
     restart: always
     network_mode: "host"

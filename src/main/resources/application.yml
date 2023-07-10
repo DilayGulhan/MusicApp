@@ -13,9 +13,10 @@ spring:
   datasource:
     initialization-mode: always
     platform: 'postgres'
-    username: ${DB_USERNAME}
-    password: ${DB_PASSWORD}
-    url: 'jdbc:postgresql://localhost:5432/musicappdemo'
+    username: postgres
+    password: 2446
+    url: jdbc:postgresql://localhost:5432/musicappdemo
+
 
   servlet:
     multipart:
@@ -27,5 +28,5 @@ swagger:
   path:
 
 security:
-  jwtSecret: ${JWT_SECRET}
+  jwtSecret: "5367566B5970337336763979244226452948404D6351665468576D5A7134743777217A25432A462D4A614E645267556B586E3272357538782F413F4428472B4B"
 
