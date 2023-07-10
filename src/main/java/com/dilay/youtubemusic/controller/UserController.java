@@ -35,8 +35,6 @@ public class UserController {
     @PostMapping("/{nameOfTheVideo}")
     public UserResponse likeVideo(@PathVariable String nameOfTheVideo){
         return userService.likeVideo( authenticationService.getAuthenticatedUserId(), nameOfTheVideo );
-
-
     }
 
     @PostMapping
