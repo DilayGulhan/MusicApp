@@ -14,7 +14,7 @@ spring:
     initialization-mode: always
     platform: 'postgres'
     username: ${DB_USERNAME}
-    password: 2446
+    password: ${DB_PASSWORD}
     url: jdbc:postgresql://localhost:5432/musicappdemo
 
 

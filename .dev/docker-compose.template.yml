@@ -5,7 +5,7 @@ services:
     environment:
       - DB_URL=jdbc:postgresql://localhost:5432/musicappdemo
       - DB_USERNAME=${DB_USERNAME}
-      - DB_PASSWORD=2446
+      - DB_PASSWORD=${DB_PASSWORD}
       - JWT_SECRET=${JWT_SECRET}
 
     restart: always
