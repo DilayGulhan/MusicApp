@@ -44,9 +44,9 @@ public class VideoController {
         videoService.deleteVideo(videoId, authenticationService.getAuthenticatedUserId());
     }
 
-    @GetMapping("/{videoTitle}")
-    public VideoResponse getVideo(@PathVariable String videoTitle) {
-        return videoService.getVideo(videoTitle);
+    @GetMapping("/{videoId}")
+    public VideoResponse getVideo(@PathVariable String videoId) {
+        return videoService.getVideo(videoId);
     }
 
 

@@ -7,6 +7,7 @@ import lombok.Data;
 
 import java.time.ZonedDateTime;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Data
 @Builder
@@ -14,9 +15,8 @@ public class CategoryResponse {
     private String id ;
     private String name;
     private boolean isSuperCategory;
-    private List<Video> videos ;
+    private List<String> videos ;
     private Category parent;
-private List<Category> childCategories;
     private ZonedDateTime createdAt;
     private ZonedDateTime updatedAt;
 
@@ -24,9 +24,9 @@ private List<Category> childCategories;
         return CategoryResponse.builder().id(category.getId())
                 .name(category.getName())
                 .isSuperCategory(category.isSuperCategory()).
-             //   videos(category.getVideosList()).
-                parent(category.getParent()).createdAt(category.getCreated()).
-
+               videos(category.getVideos().stream().map(Video::getTitle).collect(Collectors.toList())).
+                parent(category.getParent()).
+                createdAt(category.getCreated()).
                 updatedAt(category.getUpdated()).build();
 
 

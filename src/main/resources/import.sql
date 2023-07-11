@@ -21,8 +21,11 @@ VALUES ('123' , now(),now() , true , 'basecategory'  , null);
 INSERT INTO categories (id , created , updated , is_super_category , name , parent_id )
 VALUES ('1234' , now(),now() , false , 'Rockcategory'  , '123');
 INSERT INTO subscription (id, created, updated, duration, is_active, monthly_fee, name)
-VALUES   ('238', now(), now(), 3, true, 20, 'Premium');
+VALUES   ('238', now(), now(), 1, true, 20, 'Premium');
 INSERT INTO subscription (id, created, updated, duration, is_active, monthly_fee, name)
-VALUES   ('234', now(), now(), 6, true, 35, 'SuperPremium');
+VALUES   ('234', now(), now(), 3, true, 35, 'SuperPremium');
 INSERT INTO subscription (id, created, updated, duration, is_active, monthly_fee, name)
-VALUES   ('244', now(), now(), 12, true, 60, 'PrimaPremium');
+VALUES   ('244', now(), now(), 6, true, 60, 'PrimaPremium');
+
+
+

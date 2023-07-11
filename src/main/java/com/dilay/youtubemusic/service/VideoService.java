@@ -38,8 +38,8 @@ public class VideoService {
 
     }
 
-    public VideoResponse getVideo(String videoTitle) {
-        Video video = videoRepository.findByTitle(videoTitle)
+    public VideoResponse getVideo(String videoId) {
+        Video video = videoRepository.findById(videoId)
                 .orElseThrow(() ->
                         new BusinessException
                                 (ErrorCode.resource_missing, "There is no video like that!"));
@@ -50,18 +50,20 @@ public class VideoService {
     public VideoResponse addVideo(CreateVideoRequest videoRequest, String authenticatedUserId) {
         determineWhetherAdmin(authenticatedUserId);
 
-        Set<Category> categories = new HashSet<>();
-        for (String categoryId : videoRequest.getCategoryIds()) {
-            Category category = categoryRepository.findById(categoryId)
-                    .orElseThrow(() -> new BusinessException(ErrorCode.resource_missing, "The category not found"));
-            categories.add(category);
-        }
         Video video = new Video();
-        video.setCategoriesOfTheVideo(categories);
+
         video.setTitle(videoRequest.getTitle());
         video.setDuration(videoRequest.getDuration());
 
+        for (String categoryId : videoRequest.getCategoryIds()) {
+            Category category = categoryRepository.findById(categoryId)
+                    .orElseThrow(() -> new BusinessException(ErrorCode.resource_missing, "The category not found"));
+            video.getCategoriesOfTheVideo().add(category);
+            categoryRepository.save(category);
+        }
+
         videoRepository.save(video);
+
         return VideoResponse.fromEntity(video);
     }
     @Transactional

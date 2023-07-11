@@ -3,9 +3,7 @@ package com.dilay.youtubemusic.entity;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.*;
 
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.ManyToMany;
+import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -20,14 +18,16 @@ public class Video extends BaseEntity {
     private String title;
 
 
-    @ManyToMany(mappedBy = "videosList", fetch = FetchType.LAZY)
-    @JsonIgnoreProperties("videosList")
+    @ManyToMany
+    @JoinTable(name = "category_video",
+            joinColumns = @JoinColumn(name = "video_id"),
+            inverseJoinColumns = @JoinColumn(name = "category_id"))
     @Builder.Default
     private Set<Category> categoriesOfTheVideo = new HashSet<>();
 
     private Integer duration  ;
 
-    public void addCategory(Category category) {
-        this.categoriesOfTheVideo.add(category);
-    }
+//    public void addCategory(Category category) {
+//        this.categoriesOfTheVideo.add(category);
+//    }
 }
