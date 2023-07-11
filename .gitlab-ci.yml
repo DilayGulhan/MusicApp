@@ -55,7 +55,6 @@ Build:
     - docker tag $CI_REGISTRY_IMAGE:$CI_IMAGE_TAG $CI_REGISTRY_IMAGE:latest
     - docker push $CI_REGISTRY_IMAGE:$CI_IMAGE_TAG
 
-
 Test:
   image: $CI_BASE_IMAGE
   stage: test
