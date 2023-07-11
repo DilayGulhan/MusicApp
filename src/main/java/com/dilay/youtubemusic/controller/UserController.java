@@ -32,9 +32,14 @@ public class UserController {
     public UserResponse getUser(@PathVariable String userId) {
         return userService.getUser(userId , authenticationService.getAuthenticatedUserId());
     }
-    @PostMapping("/{nameOfTheVideo}")
-    public UserResponse likeVideo(@PathVariable String nameOfTheVideo){
-        return userService.likeVideo( authenticationService.getAuthenticatedUserId(), nameOfTheVideo );
+    @PostMapping("/like/{idOfTheVideo}")
+    public UserResponse likeVideo(@PathVariable String idOfTheVideo){
+        return userService.likeVideo( authenticationService.getAuthenticatedUserId(), idOfTheVideo );
+    }
+
+    @DeleteMapping("/dislike/{idOfTheVideo}")
+    public UserResponse dislikeVideo(@PathVariable String idOfTheVideo){
+        return userService.dislikeVideo( authenticationService.getAuthenticatedUserId(), idOfTheVideo );
     }
 
     @PostMapping

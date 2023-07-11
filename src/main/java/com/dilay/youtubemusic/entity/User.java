@@ -60,8 +60,8 @@ public class User extends BaseEntity {
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "video_id"))
     @ManyToMany(fetch = FetchType.LAZY)
-    @JsonIgnoreProperties("favoriteVideo")
-    private List<Video> favoriteVideos= new LinkedList<>();
+    @Builder.Default
+    private Set <Video> favoriteVideos= new HashSet<>();
 
 
 

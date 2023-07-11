@@ -23,7 +23,7 @@ public class UserResponse {
     private String surname;
     private String email;
     private UserRole userRole;
-    private Set<Video> favoriteVideos ;
+    private List<String> favoriteVideos ;
 
     public static UserResponse fromEntity(User user) {
         return UserResponse.builder()
@@ -34,7 +34,7 @@ public class UserResponse {
                 .surname(user.getSurname())
                 .email(user.getEmail())
                 .userRole(user.getUserRole())
-              //  .favoriteVideos(user.getFavoriteVideos())
+               .favoriteVideos(user.getFavoriteVideos().stream().map(Video::getTitle).collect(Collectors.toList()))
                 .build();
     }
 

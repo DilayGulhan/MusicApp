@@ -20,6 +20,7 @@ import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.util.List;
+import java.util.Set;
 
 @Service
 @Transactional
@@ -76,15 +77,34 @@ public class UserService {
 
     }
 
-    public UserResponse likeVideo(String authenticatedUserId , String videoName){
+    public UserResponse likeVideo(String authenticatedUserId , String videoId){
         User currentUser = userRepository.findById(authenticatedUserId)
                 .orElseThrow(() -> new BusinessException(ErrorCode.resource_missing, "There is no user like that!"));
-        Video video = videoRepository.findByTitle(videoName)
+        Video video = videoRepository.findById(videoId)
                         .orElseThrow(() -> new BusinessException(ErrorCode.resource_missing, "There is no video like that!"));
-        //currentUser.getFavoriteVideos().add(video);
-        List<Video> likedVideos = currentUser.getFavoriteVideos();
+
+        Set<Video> likedVideos = currentUser.getFavoriteVideos();
         likedVideos.add(video);
+        userRepository.save(currentUser);
         return UserResponse.fromEntity(currentUser);
+    }
+
+
+    public UserResponse dislikeVideo(String authenticatedUserId , String videoId){
+        User currentUser = userRepository.findById(authenticatedUserId)
+                .orElseThrow(() -> new BusinessException(ErrorCode.resource_missing, "There is no user like that!"));
+        Video video = videoRepository.findById(videoId)
+                .orElseThrow(() -> new BusinessException(ErrorCode.resource_missing, "There is no video like that!"));
+        Set<Video> likedVideos = currentUser.getFavoriteVideos();
+
+        for(Video videoToDislike : likedVideos ){
+            if(videoToDislike == video){
+                likedVideos.remove(videoToDislike);
+                userRepository.save(currentUser);
+                return UserResponse.fromEntity(currentUser);
+            }
+        }
+        throw new BusinessException(ErrorCode.resource_missing, "There is no video like that you liked!");
     }
 
     public UserResponse getUser(String userId , String authenticatedUserId) {
@@ -105,8 +125,6 @@ public class UserService {
     }
 
     public UserResponse createUser(CreateUserRequest createUserRequest ,String authenticatedUserId) {
-
-
 
         User currentUser = userRepository.findById(authenticatedUserId)
                 .orElseThrow(() -> new BusinessException(ErrorCode.resource_missing, "There is no user like that!"));
@@ -143,12 +161,13 @@ public class UserService {
         User user = userRepository.findById(userId)
                 .orElseThrow(() -> new BusinessException(ErrorCode.resource_missing, "User not found"));
 
+       Set<Video> userLikeVideo = user.getFavoriteVideos()  ;
+        for(Video video : userLikeVideo){
+            userLikeVideo.remove(video);   }
         userRepository.delete(user);
+
 
         return UserResponse.fromEntity(user);
     }
-
-
-
 
 }
