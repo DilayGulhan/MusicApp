@@ -84,6 +84,11 @@ public class CategoryService {
             videoRepository.save(video);
         }
 
+        for(User user : userRepository.findUsersByFollowedCategory(category)){
+            user.getFollowedCategory().remove(category);
+            userRepository.save(user);
+        }
+
 //        categoryRepository.findAllByParent(category)
 //                .forEach(child ->  child.setParent(category.getParent()));
         categoryRepository.deleteById(id);

@@ -42,6 +42,17 @@ public class UserController {
         return userService.dislikeVideo( authenticationService.getAuthenticatedUserId(), idOfTheVideo );
     }
 
+    @PostMapping("/follow/{idOfTheCategory}")
+    public UserResponse followCategory(@PathVariable String idOfTheCategory){
+        return userService.followCategory( authenticationService.getAuthenticatedUserId(), idOfTheCategory );
+    }
+
+    @DeleteMapping("/unfollow/{idOfTheCategory}")
+    public UserResponse unfollowCategories(@PathVariable String idOfTheCategory){
+        return userService.unfollowCategories( authenticationService.getAuthenticatedUserId(), idOfTheCategory );
+    }
+
+
     @PostMapping
     public UserResponse createUser(@Valid @RequestBody CreateUserRequest createUserRequest) {
         return userService.createUser(createUserRequest , authenticationService.getAuthenticatedUserId());

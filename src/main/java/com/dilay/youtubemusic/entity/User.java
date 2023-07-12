@@ -64,6 +64,12 @@ public class User extends BaseEntity {
     private Set <Video> favoriteVideos= new HashSet<>();
 
 
+    @JoinTable(name = "user_category",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "category_id"))
+    @ManyToMany(fetch = FetchType.LAZY)
+    @Builder.Default
+    private Set <Category> followedCategory = new HashSet<>();
 
 
 }

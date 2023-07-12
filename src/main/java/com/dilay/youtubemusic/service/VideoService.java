@@ -74,6 +74,11 @@ public class VideoService {
         Video video = videoRepository.findById(videoId)
                 .orElseThrow(() -> new BusinessException(ErrorCode.resource_missing , "There is no video like that!"));
 
+
+        for(User user : userRepository.findUsersByFavoriteVideos(video)){
+            user.getFavoriteVideos().remove(video);
+            userRepository.save(user);
+        }
     videoRepository.deleteById(videoId);
     }
 

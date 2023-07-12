@@ -1,5 +1,6 @@
 package com.dilay.youtubemusic.repository;
 
+import com.dilay.youtubemusic.entity.Category;
 import com.dilay.youtubemusic.entity.User;
 import com.dilay.youtubemusic.entity.Video;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -17,7 +18,8 @@ public interface UserRepository extends JpaRepository<User, String> {
 
     User findUserByEmail(String email);
 
-    List<User> findByFavoriteVideos(Video video );
+    List<User> findUsersByFavoriteVideos(Video video );
+    List<User> findUsersByFollowedCategory(Category category);
 
 
 }

@@ -24,6 +24,7 @@ public class UserResponse {
     private String email;
     private UserRole userRole;
     private List<String> favoriteVideos ;
+    private List<String> followedCategories ;
 
     public static UserResponse fromEntity(User user) {
         return UserResponse.builder()
@@ -35,6 +36,7 @@ public class UserResponse {
                 .email(user.getEmail())
                 .userRole(user.getUserRole())
                .favoriteVideos(user.getFavoriteVideos().stream().map(Video::getTitle).collect(Collectors.toList()))
+                .followedCategories(user.getFollowedCategory().stream().map(Category::getName).collect(Collectors.toList()))
                 .build();
     }
 

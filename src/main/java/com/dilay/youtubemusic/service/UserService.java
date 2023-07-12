@@ -1,15 +1,13 @@
 package com.dilay.youtubemusic.service;
 
-import com.dilay.youtubemusic.entity.Invoice;
-import com.dilay.youtubemusic.entity.User;
-import com.dilay.youtubemusic.entity.UserRole;
-import com.dilay.youtubemusic.entity.Video;
+import com.dilay.youtubemusic.entity.*;
 import com.dilay.youtubemusic.exception.BusinessException;
 import com.dilay.youtubemusic.exception.ErrorCode;
 import com.dilay.youtubemusic.model.request.user.CreateUserRequest;
 import com.dilay.youtubemusic.model.request.user.UpdateUserRequest;
 import com.dilay.youtubemusic.model.response.InvoiceResponse;
 import com.dilay.youtubemusic.model.response.user.UserResponse;
+import com.dilay.youtubemusic.repository.CategoryRepository;
 import com.dilay.youtubemusic.repository.UserRepository;
 import com.dilay.youtubemusic.repository.VideoRepository;
 import lombok.AllArgsConstructor;
@@ -30,6 +28,7 @@ public class UserService {
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
     private final VideoRepository videoRepository ;
+    private final CategoryRepository categoryRepository ;
 
     public Page<UserResponse> listUsers(Pageable pageable, String authenticatedUserId) {
         User currentUser = userRepository.findById(authenticatedUserId)
@@ -88,6 +87,36 @@ public class UserService {
         userRepository.save(currentUser);
         return UserResponse.fromEntity(currentUser);
     }
+
+    public UserResponse followCategory(String authenticatedUserId , String categoryId){
+        User currentUser = userRepository.findById(authenticatedUserId)
+                .orElseThrow(() -> new BusinessException(ErrorCode.resource_missing, "There is no user like that!"));
+        Category category = categoryRepository.findById(categoryId)
+                .orElseThrow(() -> new BusinessException(ErrorCode.resource_missing, "There is no category like that!"));
+
+        Set<Category> followedCategory = currentUser.getFollowedCategory();
+        followedCategory.add(category);
+        userRepository.save(currentUser);
+        return UserResponse.fromEntity(currentUser);
+    }
+
+    public UserResponse unfollowCategories(String authenticatedUserId , String categoryId){
+        User currentUser = userRepository.findById(authenticatedUserId)
+                .orElseThrow(() -> new BusinessException(ErrorCode.resource_missing, "There is no user like that!"));
+        Category category = categoryRepository.findById(categoryId)
+                .orElseThrow(() -> new BusinessException(ErrorCode.resource_missing, "There is no category like that!"));
+        Set<Category> followedCategories = currentUser.getFollowedCategory();
+
+        for(Category categoryToUnfollow : followedCategories ){
+            if(categoryToUnfollow == category){
+                followedCategories.remove(categoryToUnfollow);
+                userRepository.save(currentUser);
+                return UserResponse.fromEntity(currentUser);
+            }
+        }
+        throw new BusinessException(ErrorCode.resource_missing, "There is no category like that you liked!");
+    }
+
 
 
     public UserResponse dislikeVideo(String authenticatedUserId , String videoId){
