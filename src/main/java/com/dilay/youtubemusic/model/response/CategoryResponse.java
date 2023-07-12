@@ -16,18 +16,27 @@ public class CategoryResponse {
     private String name;
     private boolean isSuperCategory;
     private List<String> videos ;
-    private Category parent;
+    private String parent;
     private ZonedDateTime createdAt;
     private ZonedDateTime updatedAt;
 
     public static CategoryResponse fromEntity(Category category){
-        return CategoryResponse.builder().id(category.getId())
+        if(category.getParent() != null){
+            return CategoryResponse.builder().id(category.getId())
+                    .name(category.getName())
+                    .isSuperCategory(category.isSuperCategory()).
+                    videos(category.getVideos().stream().map(Video::getTitle).collect(Collectors.toList())).
+                    parent(category.getParent().getName()).
+                    createdAt(category.getCreated()).
+                    updatedAt(category.getUpdated()).build();
+        }
+        else{ return CategoryResponse.builder().id(category.getId())
                 .name(category.getName())
                 .isSuperCategory(category.isSuperCategory()).
-               videos(category.getVideos().stream().map(Video::getTitle).collect(Collectors.toList())).
-                parent(category.getParent()).
+                videos(category.getVideos().stream().map(Video::getTitle).collect(Collectors.toList())).
                 createdAt(category.getCreated()).
-                updatedAt(category.getUpdated()).build();
+                updatedAt(category.getUpdated()).build();}
+
 
 
 
