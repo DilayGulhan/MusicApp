@@ -32,10 +32,14 @@ private final ContractRecordRepository contractRecordRepository;
 public ContractRecordResponse addContractRecord(String authenticatedUserId , String subscriptionName){
     User currentUser = userRepository.findById(authenticatedUserId)
             .orElseThrow(() -> new BusinessException(ErrorCode.resource_missing, "There is no user like that!"));
+
     Subscription subscription = subscriptionRepository.findByName(subscriptionName)
             .orElseThrow(() -> new BusinessException(ErrorCode.resource_missing, "There is no subscription like that!"));
 
 
+    if(currentUser.getSubscription()!= null){
+        throw new BusinessException(ErrorCode.already_submitted , "You already submitted");
+    }
     ContractRecord record = new ContractRecord();
     record.setActive( subscription.isActive());
     record.setName(subscription.getName());
