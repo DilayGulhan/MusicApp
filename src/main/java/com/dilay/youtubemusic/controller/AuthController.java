@@ -28,24 +28,24 @@ public class AuthController {
         return authenticationService.login(loginRequest);
     }
 
-    @PostMapping("/verify")
-    public void verify(@Valid @RequestBody EmailVerificationRequest body) {
-        authenticationService.verify(body);
-    }
-
-    @PostMapping("/verify/email")
-    public void sendVerificationEmail(@Valid @RequestBody EmailRequest body) {
-        authenticationService.sendVerificationEmail(body);
-    }
-
-    @PostMapping("/recover")
-    public void recover(@Valid @RequestBody EmailRecoveryRequest body) {
-        authenticationService.recovery(body);
-    }
-
-    @PostMapping("/recover/email")
-    public void sendRecoveryEmail(@Valid @RequestBody EmailRequest body) {
-        authenticationService.sendRecoveryEmail(body);
-    }
+//    @PostMapping("/verify")
+//    public void verify(@Valid @RequestBody EmailVerificationRequest body) {
+//        authenticationService.verify(body);
+//    }
+//
+//    @PostMapping("/verify/email")
+//    public void sendVerificationEmail(@Valid @RequestBody EmailRequest body) {
+//        authenticationService.sendVerificationEmail(body);
+//    }
+//
+//    @PostMapping("/recover")
+//    public void recover(@Valid @RequestBody EmailRecoveryRequest body) {
+//        authenticationService.recovery(body);
+//    }
+//
+//    @PostMapping("/recover/email")
+//    public void sendRecoveryEmail(@Valid @RequestBody EmailRequest body) {
+//        authenticationService.sendRecoveryEmail(body);
+//    }
 
 }
