@@ -27,6 +27,7 @@ INSERT INTO subscription (id, created, updated, duration, is_active, monthly_fee
 VALUES   ('238', now(), now(), 1, true, 20, 'Premium');
 INSERT INTO subscription (id, created, updated, duration, is_active, monthly_fee, name)
 VALUES   ('234', now(), now(), 3, true, 35, 'SuperPremium');
+
 INSERT INTO subscription (id, created, updated, duration, is_active, monthly_fee, name)
 VALUES   ('244', now(), now(), 6, true, 60, 'PrimaPremium');
 
