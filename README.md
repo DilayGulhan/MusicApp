@@ -1,5 +1,5 @@
 # Music Application
-This project provides the core functionalities of a music application where users can subscribe to music content, register and log in, access premium features, upload videos, and like videos.
+This project (With using Spring Boot) provides the core functionalities of a music application where users can subscribe to music content, register and log in, access premium features, upload videos, and like videos. 
 
 ## Features
 User Registration and Login:
